@@ -4,27 +4,43 @@
       <span class="addContainer"  v-on:click="addTodo">
           <i class="fa-solid fa-plus addBtn">add</i>
       </span>
+      <alertModal v-if="showModal" @close="showModal = false">
+        <!-- you can use custom content here to overwritedefault content-->
+        <template #header>
+            경고
+            <i class="fa-solid fa-plus" @click="showModal=false">close</i>
+        </template>
+        <template #body>빈값을 입력 할 수 없습니다.</template>
+      </alertModal>
   </div>
 </template>
 
 <script>
+import alertModal from './common/AlertModal.vue'
+
 export default {
-    data : function(){
+    data(){
         return  {
             newTodoItem : ""
+            , showModal : false
         }
     }
     , methods : {
-        addTodo : function(){
+        addTodo(){
             if(this.newTodoItem !== ""){
                 console.log("add todo : " + this.newTodoItem);
                 this.$emit('addTodoItems', this.newTodoItem);
                 this.clearInput();
-            }
+            }else{
+                this.showModal = !this.showModal;
+            }   
         }
-        , clearInput : function(){
+        , clearInput(){
             this.newTodoItem = '';
         }
+    }
+    , components :{
+        alertModal
     }
 }
 </script>

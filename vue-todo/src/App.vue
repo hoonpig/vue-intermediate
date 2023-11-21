@@ -27,18 +27,18 @@ new Vue ({
 */
 
 export default {
-  data : function(){
+  data(){
     return {
       todoItems : []
     }
   }
   , components : {
-    'TodoHeader' : TodoHeader 
-    , 'TodoFooter' : TodoFooter
-    , 'TodoInput' : TodoInput
-    , 'TodoList' : TodoList
+    TodoHeader 
+    , TodoFooter
+    , TodoInput
+    , TodoList
   }
-  , created :function(){
+  , created(){
     if(localStorage.length>0){
       for(let i = 0 ; i < localStorage.length ; i++){
         console.log(localStorage.key(i));
@@ -48,22 +48,22 @@ export default {
       }
     }
   }, methods :{
-    addOneItem : function (todoItem){
+    addOneItem(todoItem){
       let obj = {completed : false, item : todoItem}
       localStorage.setItem(todoItem , JSON.stringify(obj));
       this.todoItems.push(obj);
     }
-    , removeOneItem : function( todoItem, index){
+    , removeOneItem( todoItem, index){
       localStorage.removeItem(todoItem);
       this.todoItems.splice(index,1);
     }
-    , toggleOneItem : function(todoItem, index){
+    , toggleOneItem(todoItem, index){
         console.log('remove : ' , index , " value : " , todoItem) ;
         this.todoItems[index].completed = !this.todoItems[index].completed
         localStorage.removeItem(todoItem);
         localStorage.setItem(todoItem.item,JSON.stringify(todoItem));
     }
-    , clearAllItems : function(){
+    , clearAllItems(){
       localStorage.clear();
       this.todoItems = [];
     }
