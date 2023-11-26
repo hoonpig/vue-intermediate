@@ -1,7 +1,8 @@
 <template>
     <header>
         <h1>
-            TODO IT!
+            {{this.$store.state.headerText}}
+
         </h1>
     </header>
 </template>
