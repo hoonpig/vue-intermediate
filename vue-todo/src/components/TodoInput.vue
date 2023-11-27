@@ -16,7 +16,8 @@
 </template>
 
 <script>
-import alertModal from './common/AlertModal.vue'
+import alertModal from './common/AlertModal.vue';
+import {mapMutations} from 'vuex';
 
 export default {
     data(){
@@ -28,7 +29,7 @@ export default {
     , methods : {
         addTodo(){
             if(this.newTodoItem !== ""){
-                this.$store.commit('addOneItem', this.newTodoItem);
+                this.addOneItem( this.newTodoItem);
                 this.clearInput();
             }else{
                 this.showModal = !this.showModal;
@@ -37,6 +38,7 @@ export default {
         , clearInput(){
             this.newTodoItem = '';
         }
+        ,...mapMutations(['addOneItem'])
     }
     , components :{
         alertModal

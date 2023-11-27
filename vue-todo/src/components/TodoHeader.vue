@@ -1,15 +1,18 @@
 <template>
     <header>
         <h1>
-            {{this.$store.state.headerText}}
-
+            {{this.headerText}}
         </h1>
     </header>
 </template>
 
 <script>
-export default {
+import {mapState} from 'vuex';
 
+export default {
+    computed:{
+     ...mapState(['headerText'])   
+    }
 }
 </script>
 

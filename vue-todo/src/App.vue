@@ -15,21 +15,12 @@ import TodoList from './components/TodoList.vue'
 
 
 export default {
-  data(){
-    return {
-      todoItems : []
-    }
-  }
-  , components : {
+  components : {
     TodoHeader 
     , TodoFooter
     , TodoInput
     , TodoList
   }
-  , methods :{
-    
-  }
-
 }
 </script>
 

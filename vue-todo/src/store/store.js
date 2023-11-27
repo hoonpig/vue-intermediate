@@ -21,26 +21,25 @@ export default createStore({
   state :{
       headerText : 'TODO IT!'
       , todoItems : storage.fetch()
+  }
+  , getters :{
+    storedTodoItems(state){
+      return state.todoItems;
+    }
   }  
   , mutations :{
     addOneItem(state, todoItem){
       const obj = {completed : false, item : todoItem}; 
-      localStorage.setItem(todoItem , JSON.stringify(obj));
       state.todoItems.push(obj);
     }
-    , removeOneItem(state,  todoItem, index){
-      localStorage.removeItem(todoItem);
-      state.todoItems.splice(index,1);
+    , removeOneItem(state,  payload){
+      state.todoItems.splice(payload.index,1);
     }
-    , toggleOneItem(state, todoItem, index){
-        console.log('remove : ' , index , " value : " , todoItem) ;
-        state.todoItems[index].completed = !state.todoItems[index].completed
-        localStorage.removeItem(todoItem);
-        localStorage.setItem(todoItem.item,JSON.stringify(todoItem));
+    , toggleOneItem(state, payload){
+        state.todoItems[payload.index].completed = !state.todoItems[payload.index].completed;
     }
-    , clearAllItems(){
-      localStorage.clear();
-      this.todoItems = [];
+    , clearAllItems(state){
+      state.todoItems = [];
     }
   }
-})
+}) 
